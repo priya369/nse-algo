@@ -21,7 +21,7 @@ tables = {
 
   daily_ohlcv = {
 
-    dataset_id = "stock_market"
+    dataset_id = "nse_algo"
 
     schema = [
       {
