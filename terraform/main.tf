@@ -15,17 +15,17 @@ provider "google" {
 }
 
 
-resource "google_bigquery_dataset" "stock_market" {
+resource "google_bigquery_dataset" "nse_algo" {
   project    = var.project_id
   dataset_id = "nse-algo"
   location   = var.bigquery_location
 }
 
-module "stock_market_table" {
+module "nse_algo_table" {
   source = "./modules/bigquery-table"
 
   project_id = var.project_id
-  dataset_id = google_bigquery_dataset.stock_market.dataset_id
+  dataset_id = google_bigquery_dataset.nse_algo.dataset_id
   table_id   = "daily_ohlcv"
 
   deletion_protection = true
