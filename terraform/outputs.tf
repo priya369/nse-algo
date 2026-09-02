@@ -13,12 +13,10 @@ output "cloud_run_job_location" {
   value       = module.nse_ingestion_job.job_location
 }
 
-output "bigquery_table_id" {
-  description = "BigQuery table ID"
-  value       = module.stock_market_table.table_id
-}
-
-output "bigquery_table_name" {
-  description = "BigQuery table name"
-  value       = module.stock_market_table.table_name
+output "bigquery_table_names" {
+  description = "Fully qualified BigQuery table names"
+  value = {
+    for table_name, table in module.bigquery_tables :
+    table_name => table.table_name
+  }
 }
