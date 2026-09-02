@@ -5,55 +5,16 @@ resource "google_bigquery_table" "this" {
 
   deletion_protection = var.deletion_protection
 
-  schema = jsonencode([
-    {
-      name = "Symbol"
-      type = "STRING"
-      mode = "REQUIRED"
-    },
-    {
-      name = "Date"
-      type = "DATE"
-      mode = "REQUIRED"
-    },
-    {
-      name = "open"
-      type = "FLOAT64"
-      mode = "NULLABLE"
-    },
-    {
-      name = "high"
-      type = "FLOAT64"
-      mode = "NULLABLE"
-    },
-    {
-      name = "low"
-      type = "FLOAT64"
-      mode = "NULLABLE"
-    },
-    {
-      name = "close"
-      type = "FLOAT64"
-      mode = "NULLABLE"
-    },
-    {
-      name = "volume"
-      type = "INT64"
-      mode = "NULLABLE"
-    },
-    {
-      name = "delivery_percentage"
-      type = "FLOAT64"
-      mode = "NULLABLE"
-    }
-  ])
+  schema = var.schema
 
-  time_partitioning {
-    type  = "DAY"
-    field = "Date"
+  dynamic "time_partitioning" {
+    for_each = var.partition_field != null ? [1] : []
+
+    content {
+      type  = "DAY"
+      field = var.partition_field
+    }
   }
 
-  clustering = [
-    "Symbol"
-  ]
+  clustering = var.clustering
 }

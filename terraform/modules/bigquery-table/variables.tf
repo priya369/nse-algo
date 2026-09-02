@@ -13,6 +13,23 @@ variable "table_id" {
   type        = string
 }
 
+variable "schema" {
+  description = "BigQuery table schema"
+  type        = string
+}
+
+variable "partition_field" {
+  description = "Column used for time partitioning"
+  type        = string
+  default     = null
+}
+
+variable "clustering" {
+  description = "Columns used for clustering"
+  type        = list(string)
+  default     = []
+}
+
 variable "deletion_protection" {
   description = "Protect table from accidental deletion"
   type        = bool

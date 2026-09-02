@@ -24,3 +24,23 @@ variable "cloud_run_service_account" {
   description = "Cloud Run Job service account"
   type        = string
 }
+
+variable "datasets" {
+  description = "BigQuery datasets to create"
+
+  type = map(object({
+    location = string
+  }))
+}
+
+variable "tables" {
+  description = "BigQuery tables to create"
+
+  type = map(object({
+    dataset_id          = string
+    schema              = string
+    partition_field     = optional(string)
+    clustering          = optional(list(string), [])
+    deletion_protection = optional(bool, true)
+  }))
+}
