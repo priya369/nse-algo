@@ -13,7 +13,7 @@ datasets = {
   nse_algo = {
     location = "asia-south1"
   }
-  
+
 }
 
 
@@ -21,9 +21,9 @@ tables = {
 
   daily_ohlcv = {
 
-    dataset_id = "nse_algo"
+    dataset_id = "stock_market"
 
-    schema = jsonencode([
+    schema = [
       {
         name = "Symbol"
         type = "STRING"
@@ -58,7 +58,7 @@ tables = {
         name = "delivery_percentage"
         type = "FLOAT64"
       }
-    ])
+    ]
 
     partition_field = "Date"
     clustering      = ["Symbol"]

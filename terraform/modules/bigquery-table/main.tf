@@ -5,7 +5,7 @@ resource "google_bigquery_table" "this" {
 
   deletion_protection = var.deletion_protection
 
-  schema = var.schema
+  schema = jsonencode(var.schema)
 
   dynamic "time_partitioning" {
     for_each = var.partition_field != null ? [1] : []
