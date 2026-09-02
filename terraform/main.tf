@@ -1,9 +1,4 @@
 terraform {
-  backend "gcs" {
-    bucket = "YOUR-TERRAFORM-STATE-BUCKET"
-    prefix = "stock-market"
-  }
-
   required_providers {
     google = {
       source  = "hashicorp/google"

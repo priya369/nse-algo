@@ -15,7 +15,12 @@ variable "table_id" {
 
 variable "schema" {
   description = "BigQuery table schema"
-  type        = string
+
+  type = list(object({
+    name = string
+    type = string
+    mode = optional(string, "NULLABLE")
+  }))
 }
 
 variable "partition_field" {
