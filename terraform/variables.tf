@@ -37,8 +37,14 @@ variable "tables" {
   description = "BigQuery tables to create"
 
   type = map(object({
-    dataset_id          = string
-    schema              = string
+    dataset_id = string
+
+    schema = list(object({
+      name = string
+      type = string
+      mode = optional(string, "NULLABLE")
+    }))
+
     partition_field     = optional(string)
     clustering          = optional(list(string), [])
     deletion_protection = optional(bool, true)
