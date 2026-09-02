@@ -17,7 +17,7 @@ provider "google" {
 
 resource "google_bigquery_dataset" "stock_market" {
   project    = var.project_id
-  dataset_id = "stock_market"
+  dataset_id = "nse-raw-data"
   location   = var.bigquery_location
 }
 
