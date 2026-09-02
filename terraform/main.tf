@@ -47,13 +47,13 @@ module "nse_ingestion_job" {
     BQ_DATASET     = "stock_market"
     BQ_TABLE       = "daily_ohlcv"
 
-    SYMBOL    = "SBIN"
-    FROM_DATE = "01-01-2017"
-    TO_DATE   = "31-01-2026"
+    SYMBOL    = "KFINTECH"
+    FROM_DATE = "01-01-2023"
+    TO_DATE   = "31-08-2026"
   }
 
-  cpu     = "2"
-  memory  = "4Gi"
+  cpu     = "1"
+  memory  = "2Gi"
   timeout = "3600s"
 
   max_retries = 3
