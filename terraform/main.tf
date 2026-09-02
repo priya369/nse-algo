@@ -1,4 +1,9 @@
 terraform {
+  backend "gcs" {
+    bucket = "YOUR-TERRAFORM-STATE-BUCKET"
+    prefix = "stock-market"
+  }
+
   required_providers {
     google = {
       source  = "hashicorp/google"
@@ -15,26 +20,47 @@ provider "google" {
 }
 
 
-resource "google_bigquery_dataset" "nse_algo" {
+# =========================
+# BigQuery Datasets
+# =========================
+
+resource "google_bigquery_dataset" "datasets" {
+  for_each = var.datasets
+
   project    = var.project_id
-  dataset_id = "nse-algo"
-  location   = var.bigquery_location
+  dataset_id = each.key
+  location   = each.value.location
 }
 
-module "nse_algo_table" {
+
+# =========================
+# BigQuery Tables
+# =========================
+
+module "bigquery_tables" {
+  for_each = var.tables
+
   source = "./modules/bigquery-table"
 
   project_id = var.project_id
-  dataset_id = google_bigquery_dataset.nse_algo.dataset_id
-  table_id   = "daily_ohlcv"
+  dataset_id = each.value.dataset_id
+  table_id   = each.key
 
-  deletion_protection = true
+  schema          = each.value.schema
+  partition_field = try(each.value.partition_field, null)
+  clustering      = each.value.clustering
+
+  deletion_protection = each.value.deletion_protection
+
+  depends_on = [
+    google_bigquery_dataset.datasets
+  ]
 }
 
 module "nse_ingestion_job" {
   source = "./modules/cloud-run-job"
 
-  job_name = "nse-stock-ingestion"
+  job_name = "nse-raw-ingestion"
 
   region = var.region
 
@@ -44,7 +70,7 @@ module "nse_ingestion_job" {
 
   environment_variables = {
     GCP_PROJECT_ID = var.project_id
-    BQ_DATASET     = "stock_market"
+    BQ_DATASET     = "nse_algo"
     BQ_TABLE       = "daily_ohlcv"
 
     SYMBOL    = "KFINTECH"
