@@ -42,24 +42,40 @@ def fetch_nse_data(symbol: str, from_date: str, to_date: str) -> pd.DataFrame:
     )
 
     # Data types
+    # Date
     df["Date"] = pd.to_datetime(
-        df["Date"],
-        format="%d-%b-%Y"
+             df["Date"],
+             format="%d-%b-%Y",
+             errors="coerce"
     ).dt.date
 
-    df["open"] = pd.to_numeric(df["open"], errors="coerce")
-    df["high"] = pd.to_numeric(df["high"], errors="coerce")
-    df["low"] = pd.to_numeric(df["low"], errors="coerce")
-    df["close"] = pd.to_numeric(df["close"], errors="coerce")
-    df["volume"] = pd.to_numeric(
-        df["volume"],
-        errors="coerce"
-    ).astype("Int64")
 
-    df["delivery_percentage"] = pd.to_numeric(
-        df["delivery_percentage"],
-        errors="coerce"
-    )
+# Numeric columns
+    numeric_columns = [
+       "open",
+       "high",
+       "low",
+       "close",
+       "volume",
+       "delivery_percentage"
+    ]
+
+    for col in numeric_columns:
+        df[col] = (
+              df[col]
+              .astype("string")
+              .str.replace(",", "", regex=False)
+              .str.strip()
+        )
+
+        df[col] = pd.to_numeric(
+              df[col],
+              errors="coerce"
+        )
+
+
+    # Volume should be integer
+    df["volume"] = df["volume"].astype("Int64")
 
     return df
 
