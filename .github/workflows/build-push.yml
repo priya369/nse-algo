@@ -18,6 +18,7 @@ env:
   REGION: asia-south1
   REPOSITORY: nse
   IMAGE_NAME: nse-ingestion
+  CLOUD_RUN_JOB: nse-ingestion-job
 
 jobs:
   build-push:
@@ -58,3 +59,19 @@ jobs:
         run: |
           docker push \
             ${REGION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/${IMAGE_NAME}:${GITHUB_SHA}
+
+      # 7. Update Cloud Run Job with new image
+      - name: Update Cloud Run Job
+        run: |
+          gcloud run jobs update ${CLOUD_RUN_JOB} \
+            --image=${REGION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/${IMAGE_NAME}:${GITHUB_SHA} \
+            --region=${REGION} \
+            --project=${PROJECT_ID}
+
+      # 8. Execute Cloud Run Job
+      - name: Execute Cloud Run Job
+        run: |
+          gcloud run jobs execute ${CLOUD_RUN_JOB} \
+            --region=${REGION} \
+            --project=${PROJECT_ID} \
+            --wait
