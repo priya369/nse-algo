@@ -18,7 +18,7 @@ def fetch_nse_data(symbol: str, from_date: str, to_date: str) -> pd.DataFrame:
     # Select and rename required columns
     df = df[
         [
-            "Symbol",
+            'ï»¿"Symbol"',
             "Date",
             "OpenPrice",
             "HighPrice",
@@ -31,6 +31,7 @@ def fetch_nse_data(symbol: str, from_date: str, to_date: str) -> pd.DataFrame:
 
     df = df.rename(
         columns={
+            'ï»¿"Symbol"': "Symbol",
             "OpenPrice": "open",
             "HighPrice": "high",
             "LowPrice": "low",
