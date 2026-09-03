@@ -90,9 +90,9 @@ def load_to_bigquery(df: pd.DataFrame):
 
 def main():
 
-    symbol = os.environ.get("SYMBOL", "SBIN")
-    from_date = os.environ.get("FROM_DATE", "01-01-2024")
-    to_date = os.environ.get("TO_DATE", "31-01-2024")
+    symbol = os.environ.get("SYMBOL", "KFINTECH")
+    from_date = os.environ.get("FROM_DATE", "01-01-2023")
+    to_date = os.environ.get("TO_DATE", "31-01-2026")
 
     print(
         f"Fetching {symbol} data "
