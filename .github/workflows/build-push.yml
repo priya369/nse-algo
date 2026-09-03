@@ -18,7 +18,7 @@ env:
   REGION: asia-south1
   REPOSITORY: nse
   IMAGE_NAME: nse-ingestion
-  CLOUD_RUN_JOB: nse-ingestion-job
+  CLOUD_RUN_JOB: nse-raw-ingestion
 
 jobs:
   build-push:
