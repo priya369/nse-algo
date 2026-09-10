@@ -147,8 +147,8 @@ def load_to_bigquery(df: pd.DataFrame):
 
 
 def main():
-    from_date="01-01-2018"
-    to_date="31-12-2022"
+    from_date="01-01-2023"
+    to_date="31-12-2026"
     print("=" * 60)
     print("NSE STOCK DATA INGESTION")
     print("=" * 60)
@@ -167,8 +167,8 @@ def main():
 
             df = fetch_nse_data(
                 symbol=symbol,
-                from_date="01-01-2018",
-                to_date="31-12-2022"
+                from_date="01-01-2023",
+                to_date="31-12-2026"
             )
 
             print(
