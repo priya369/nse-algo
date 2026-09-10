@@ -38,5 +38,5 @@ variable "clustering" {
 variable "deletion_protection" {
   description = "Protect table from accidental deletion"
   type        = bool
-  default     = true
+  default     = false
 }
