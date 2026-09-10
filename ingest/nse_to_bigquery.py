@@ -170,12 +170,12 @@ def main():
 
     from_date = os.environ.get(
         "FROM_DATE",
-        "01-01-2023"
+        "01-01-2018"
     )
 
     to_date = os.environ.get(
         "TO_DATE",
-        "31-01-2026"
+        "31-12-2022"
     )
 
     print("=" * 60)
