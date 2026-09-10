@@ -148,16 +148,6 @@ def load_to_bigquery(df: pd.DataFrame):
 
 def main():
 
-    from_date = os.environ.get(
-        "FROM_DATE",
-        "01-01-2018"
-    )
-
-    to_date = os.environ.get(
-        "TO_DATE",
-        "31-12-2022"
-    )
-
     print("=" * 60)
     print("NSE STOCK DATA INGESTION")
     print("=" * 60)
@@ -176,8 +166,8 @@ def main():
 
             df = fetch_nse_data(
                 symbol=symbol,
-                from_date=from_date,
-                to_date=to_date
+                from_date="01-01-2018",
+                to_date="31-12-2022"
             )
 
             print(
