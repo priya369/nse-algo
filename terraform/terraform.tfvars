@@ -18,6 +18,50 @@ datasets = {
 
 
 tables = {
+  daily_ohlcv = {
+
+    dataset_id = "nse_algo"
+
+    schema = [
+      {
+        name = "Symbol"
+        type = "STRING"
+        mode = "REQUIRED"
+      },
+      {
+        name = "Date"
+        type = "DATE"
+        mode = "REQUIRED"
+      },
+      {
+        name = "open"
+        type = "FLOAT64"
+      },
+      {
+        name = "high"
+        type = "FLOAT64"
+      },
+      {
+        name = "low"
+        type = "FLOAT64"
+      },
+      {
+        name = "close"
+        type = "FLOAT64"
+      },
+      {
+        name = "volume"
+        type = "INT64"
+      },
+      {
+        name = "delivery_percentage"
+        type = "FLOAT64"
+      }
+    ]
+
+    partition_field = "Date"
+    clustering      = ["Symbol"]
+  },
 
   daily_ohlcv-2018-2022 = {
 
