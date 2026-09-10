@@ -6,41 +6,21 @@ import time
 
 
 SYMBOLS = [
-    "SUNPHARMA",
-    "DRREDDY",
     "CIPLA",
     "DIVISLAB",
-    "MANKIND",
     "ALKEM",
     "BIOCON",
     "COHANCE",
-    "MEDPLUS",
     "SYNGENE",
-    "MAXHEALTH",
-    "ABBOTINDIA",
-    "APLLTD",
     "BLUEJET",
     "LUPIN",
-    "PFIZER",
-    "THYROCARE",
     "AKUMS",
-    "ASTRAZEN",
-    "ENTERO",
     "RAINBOW",
-    "METROPOLIS",
-    "ALIVUS",
-    "MEDIASSIST",
     "HIKAL",
     "FINEORG",
-    "AARTIDRUGS",
-    "SANOFICONR",
     "AUROPHARMA",
     "WINDLAS",
-    "LAXMIDENTL",
-    "FDC",
-    "MANIPALHOS",
-    "INDOCO",
-    "JLHL"
+    "FDC"
 ]
 
 
