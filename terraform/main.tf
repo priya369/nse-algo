@@ -66,7 +66,7 @@ module "nse_ingestion_job" {
   environment_variables = {
     GCP_PROJECT_ID = var.project_id
     BQ_DATASET     = "nse_algo"
-    BQ_TABLE       = "daily_ohlcv-2018-2022"
+    BQ_TABLE       = "daily_ohlcv-2023-2026"
   }
 
   cpu     = "1"
